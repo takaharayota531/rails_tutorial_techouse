@@ -1,3 +1,4 @@
+# 静的ページ用のコントローラー
 class StaticPagesController < ApplicationController
   def home; end
 

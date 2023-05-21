@@ -44,7 +44,8 @@
 		"fallenmax.mithril-emmet",
 		"gruntfuggly.todo-tree",
 		"formulahendry.auto-close-tag",
-		"cjay.ruby-and-rails-snippets"
+		"cjay.ruby-and-rails-snippets",
+		"MS-CEINTL.vscode-language-pack-ja"
 	]
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
