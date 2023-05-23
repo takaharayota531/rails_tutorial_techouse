@@ -1,4 +1,8 @@
-# require 'rails_helper'
+# frozen_string_literal: true
+
+# layoutのテスト
+
+require 'rails_helper'
 
 # RSpec.describe 'SiteLayouts', type: :request do
 #   describe 'GET /site_layouts' do

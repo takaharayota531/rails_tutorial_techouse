@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # 静的ページ用のコントローラー
 class StaticPagesController < ApplicationController
   def home; end

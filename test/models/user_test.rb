@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(name: 'example user', email: 'user@example.com')
+    @user = User.new(name: 'example user', email: 'user@example.com',
+                     password: 'foobar', password_confirmation: 'foobar')
   end
 
   test 'should be valid' do
@@ -43,5 +46,29 @@ class UserTest < ActiveSupport::TestCase
       @user.email = address
       assert_not @user.valid?, "#{address.inspect} should be valid"
     end
+  end
+
+  test 'email addresses should be unique' do
+    duplicate_user = @user.dup
+
+    @user.save
+    assert_not duplicate_user.valid?
+  end
+
+  test 'email address should be saved as lower case' do
+    mixed_email = 'uSer@Example.Com'
+
+    @user.email = mixed_email
+    @user.save
+    assert_equal @user.reload.email, mixed_email.downcase
+  end
+
+  test 'password should be present(nonblank)' do
+    @user.password = @user.password_confirmation = ' ' * 6
+    assert_not @user.valid?
+  end
+  test 'password should have a minimum length' do
+    @user.password = @user.password_confirmation = 'a' * 5
+    assert_not @user.valid?
   end
 end
