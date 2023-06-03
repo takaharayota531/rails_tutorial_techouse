@@ -16,6 +16,8 @@ class UsersController < ApplicationController
 
     # return if @user.save
     if @user.save
+      reset_session
+      log_in @user
       flash[:success] = "welcome to the show page #{@user.name}"
       redirect_to user_path(@user)
     else

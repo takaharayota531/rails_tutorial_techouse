@@ -77,6 +77,7 @@ group :development do
 
   gem 'better_html'
   gem 'erb_lint', require: false
+  gem 'factory_bot_rails'
   gem 'solargraph'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
@@ -89,7 +90,8 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara', '3.37.1'
-  gem 'minitest',                 '5.15.0'
+  gem 'factory_bot_rails'
+  gem 'minitest', '5.15.0'
   gem 'minitest-reporters',       '1.5.0'
   gem 'rails-controller-testing', '1.0.5'
   gem 'selenium-webdriver', '4.2.0'
