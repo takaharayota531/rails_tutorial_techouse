@@ -4,6 +4,7 @@ module SessionsHelper
   # sessionで作成されたcookiesはブラウザを閉じた瞬間に消える
   def log_in(user)
     session[:user_id] = user.id
+    # セッションリプレイ攻撃から保護する
     session[:session_token]=user.session_token
   end
 
