@@ -14,7 +14,10 @@ gem 'omniauth-rails_csrf_protection'
 gem 'rails', '7.0.4.2'
 
 gem 'bcrypt', '3.1.18'
+gem 'bootstrap-will_paginate', '1.0.0'
+gem 'faker', '2.21.0'
 gem 'line-bot-api'
+gem 'will_paginate', '3.3.1'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails', '3.4.2'

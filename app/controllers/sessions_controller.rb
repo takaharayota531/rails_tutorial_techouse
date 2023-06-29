@@ -7,6 +7,8 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email].downcase)
 
     if @user&.authenticate(params[:session][:password])
+      # ログイン前に遷移しようとしていたURLを表示
+      forwarding_url = session[:forwarding_url]
       # ここでリダイレクトする
 
       # 新しいセッションハッシュが使われるようになる
@@ -17,7 +19,8 @@ class SessionsController < ApplicationController
         forget @user
       end
       log_in @user
-      redirect_to user_path(@user)
+      # forwarding_urlが存在する場合は事前のurlに飛ぶようにする
+      redirect_to forwarding_url || user_path(@user)
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new', status: :unprocessable_entity

@@ -88,6 +88,8 @@ GEM
     bootstrap-sass (3.4.1)
       autoprefixer-rails (>= 5.2.1)
       sassc (>= 2.0.0)
+    bootstrap-will_paginate (1.0.0)
+      will_paginate
     builder (3.2.4)
     capybara (3.37.1)
       addressable
@@ -132,6 +134,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (2.21.0)
+      i18n (>= 1.8.11, < 2)
     faraday (2.7.4)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -375,6 +379,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yard (0.9.34)
@@ -388,12 +393,14 @@ DEPENDENCIES
   better_html
   bootsnap (= 1.12.0)
   bootstrap-sass (= 3.4.1)
+  bootstrap-will_paginate (= 1.0.0)
   capybara (= 3.37.1)
   debug (= 1.5.0)
   devise
   dotenv-rails
   erb_lint
   factory_bot_rails
+  faker (= 2.21.0)
   importmap-rails (= 1.1.0)
   jbuilder (= 2.11.5)
   line-bot-api
@@ -419,6 +426,7 @@ DEPENDENCIES
   tzinfo-data
   web-console (= 4.2.0)
   webdrivers (= 5.0.0)
+  will_paginate (= 3.3.1)
 
 BUNDLED WITH
    2.3.7

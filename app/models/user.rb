@@ -12,7 +12,7 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true
   has_secure_password
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   def self.digest(string)
     cost = if ActiveModel::SecurePassword.min_cost
@@ -37,8 +37,8 @@ class User < ApplicationRecord
   end
 
   # セッションハイジャックのためにセッショントークンを返す
-  # 記憶ダイジェストも利用
-  def session_token 
+  # 記憶ダイジェストを再利用しているのは利便性のため
+  def session_token
     remember_digest || remember
   end
 

@@ -8,13 +8,13 @@ class SessionsHelperTest < ActionView::TestCase
     remember(@user)
   end
 
-#   test 'current_user returns right user when section is nil' do
-#     # puts current_user
-#     # puts @user
-#     assert_equal @user, current_user
+  #   test 'current_user returns right user when section is nil' do
+  #     # puts current_user
+  #     # puts @user
+  #     assert_equal @user, current_user
 
-#     assert is_logged_in?
-#   end
+  #     assert is_logged_in?
+  #   end
 
   test 'current_user returns nil when remember digest is wrong' do
     @user.update_attribute(:remember_digest, User.digest(User.new_token))
