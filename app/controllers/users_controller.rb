@@ -26,10 +26,14 @@ class UsersController < ApplicationController
 
     # return if @user.save
     if @user.save
-      reset_session
-      log_in @user
-      flash[:success] = "welcome to the show page #{@user.name}"
-      redirect_to user_path(@user)
+
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = ACTIVATE_MESSAGE
+      redirect_to root_path
+      # reset_session
+      # log_in @user
+      # flash[:success] = "welcome to the show page #{@user.name}"
+      # redirect_to user_path(@user)
     else
       render 'new', status: :unprocessable_entity
     end

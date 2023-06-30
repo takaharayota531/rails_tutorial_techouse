@@ -7,20 +7,27 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:session][:email].downcase)
 
     if @user&.authenticate(params[:session][:password])
-      # ログイン前に遷移しようとしていたURLを表示
-      forwarding_url = session[:forwarding_url]
-      # ここでリダイレクトする
+      if @user.activated?
+        # ログイン前に遷移しようとしていたURLを表示
+        forwarding_url = session[:forwarding_url]
+        # ここでリダイレクトする
 
-      # 新しいセッションハッシュが使われるようになる
-      reset_session
-      if params[:session][:remember_me] == '1'
-        remember @user
+        # 新しいセッションハッシュが使われるようになる
+        reset_session
+        if params[:session][:remember_me] == '1'
+          remember @user
+        else
+          forget @user
+        end
+        log_in @user
+        # forwarding_urlが存在する場合は事前のurlに飛ぶようにする
+        redirect_to forwarding_url || user_path(@user)
       else
-        forget @user
+        message = ACCOUNT_NOT_ACTIVATED
+        message += CHECK_YOUR_EMAIL_FOR_ACTIVATION_LINK
+        flash[:warning] = message
+        redirect_to root_path
       end
-      log_in @user
-      # forwarding_urlが存在する場合は事前のurlに飛ぶようにする
-      redirect_to forwarding_url || user_path(@user)
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new', status: :unprocessable_entity
