@@ -51,18 +51,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
-  test "should redirect index when not logged in" do 
-
-    get users_path 
+  test 'should redirect index when not logged in' do
+    get users_path
     assert_redirected_to login_path
   end
 
-  test "should not allow the admin attribute to be edited via web" do 
+  test 'should not allow the admin attribute to be edited via web' do
     log_in_as_in_integration(@other_user)
     assert_not @other_user.admin?
-    patch user_path(@other_user),params:{
-      user:{
-        password:'password',
+    patch user_path(@other_user), params: {
+      user: {
+        password: 'password',
         password_confirmation: 'password',
         admin: true
       }
@@ -70,4 +69,26 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not @other_user.reload.admin?
   end
 
+  test 'should redirect destroy when not logged in' do
+    log_in_as_in_integration(@other_user)
+    assert_no_difference 'User.count' do
+      delete user_path(@other_user)
+    end
+
+    assert_response :see_other
+    assert_redirected_to root_path
+  end
+
+  test 'should redirect destroy when logged in as a non-admin' do
+    log_in_as_in_integration(@other_user)
+    is_logged_in_in_integration?
+    assert @user.admin?
+    assert_not @other_user.admin?
+    @user.admin?
+    assert_no_difference 'User.count' do
+      delete user_path(@user)
+    end
+    assert_response :see_other
+    assert_redirected_to root_path
+  end
 end

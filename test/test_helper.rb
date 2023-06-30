@@ -30,6 +30,10 @@ end
 # ここの記法があっているかわからん
 module ActionDispatch
   class IntegrationTest
+    def is_logged_in_in_integration?
+      !session[:user_id].nil?
+    end
+
     # テストユーザーとしてログインする
     # キーのデフォルトも定めている
     def log_in_as_in_integration(user, password: 'password', remember_me: '1')
