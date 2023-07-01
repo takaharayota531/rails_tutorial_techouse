@@ -2,7 +2,7 @@ require 'test_helper'
 class UsersShowTest < ActionDispatch::IntegrationTest
   def setup
     @inactive_user = users(:inactive)
-    @activated_user = users(:archer)
+    @active_user = users(:archer)
   end
 
   test 'should redirect when user not activated' do
@@ -11,6 +11,6 @@ class UsersShowTest < ActionDispatch::IntegrationTest
   end
   test 'should redirect when user  activated' do
     get user_path(@active_user)
-    assert_redirected_to user_path(@active_user)
+    assert_template 'users/show'
   end
 end
