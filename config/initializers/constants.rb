@@ -24,3 +24,7 @@ EMAIL_SENT_WITH_PASSWORD_RESET_INSTRUCTIONS = 'Email sent with password reset in
 EMAIL_ADDRESS_NOT_FOUND = 'Email address not found'
 PASSWORD_RESET = 'Password reset'
 PASSWORD_RESET_HAS_EXPIRED = 'Password reset has expired.'
+
+# micropost
+MICROPOST_CREATED = 'Micropost created!'
+MICROPOST_DELETED = 'Micropost deleted'

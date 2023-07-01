@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
     redirect_to root_path and return unless @user.activated?
   end
 
@@ -66,17 +67,6 @@ class UsersController < ApplicationController
   def user_params
     # railsはメソッドの最後に評価された式の値が返り値となる
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def logged_in_user
-    return if logged_in?
-
-    # 事前にstore_locationによってログインする前に遷移しようとしていたURLを保管しておく
-
-    store_location
-
-    flash[:danger] = LOG_IN
-    redirect_to login_path, status: :see_other
   end
 
   def correct_user

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :microposts, dependent: :destroy
   # トークン系は仮のものでしかないのでモデルの属性として追加する
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -84,6 +85,10 @@ class User < ApplicationRecord
   # パスワードの有効期限が切れているかチェック
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  def feed
+    Micropost.where('user_id = ?', id)
   end
 
   private
