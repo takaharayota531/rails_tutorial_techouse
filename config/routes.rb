@@ -4,10 +4,6 @@ Rails.application.routes.draw do
   get 'sessions/new'
   get 'users/new'
   root 'static_pages#home'
-  # get 'static_pages/home'
-  # get 'static_pages/help'
-  # get 'static_pages/about'
-  # get 'static_pages/contact'
 
   get '/help', to: 'static_pages#help'
   get '/home', to: 'static_pages#home'
@@ -21,4 +17,5 @@ Rails.application.routes.draw do
 
   resources :users
   resources :account_activations, only: [:edit]
+  resources :password_resets, only: %i[new create edit update]
 end
