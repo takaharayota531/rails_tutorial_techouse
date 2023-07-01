@@ -13,7 +13,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     assert_template 'users/index'
     assert_select 'div.pagination'
 
-    first_page_of_users = User.paginate(page: 1)
+    first_page_of_users = User.where(activated: true).paginate(page: 1)
     first_page_of_users.each do |user|
       assert_select 'a[href=?]', user_path(user), text: user.name
       assert_select 'a[href=?]', user_path(user), text: 'delete' unless user == @admin
@@ -24,6 +24,15 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
       assert_equal USER_DELETED, flash[:success]
       assert_response :see_other
       assert_redirected_to users_path
+    end
+  end
+
+  test 'should display only activated users' do
+    log_in_as_in_integration(@admin)
+    User.paginate(page: 1).first.toggle!(:activated)
+    get users_path
+    assigns(:users).each do |user|
+      assert user.activated?
     end
   end
 
