@@ -28,3 +28,8 @@ PASSWORD_RESET_HAS_EXPIRED = 'Password reset has expired.'
 # micropost
 MICROPOST_CREATED = 'Micropost created!'
 MICROPOST_DELETED = 'Micropost deleted'
+
+# follow
+FOLLOWING = 'Following'
+FOLLOWERS = 'Followers'
+SHOW_FOLLOW = 'show_follow'
